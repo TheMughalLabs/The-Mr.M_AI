@@ -123,7 +123,7 @@ details{margin-top:8px;border:1px dashed var(--border);border-radius:14px;paddin
 <script>
 var $ = function (i) { return document.getElementById(i); };
 var what = $('what'), site = $('site'), cat = $('cat'), go = $('go'), out = $('out'), statusEl = $('status');
-var results = [], seen = {}, busy = false, mode = 'direct', q0 = '', last = null, page = 0, ytNext = '', newCount = 0, currentJobs = [];
+var results = [], seen = {}, busy = false, mode = 'direct', q0 = '', last = null, page = 0, ytNext = '', newCount = 0, currentJobs = [], modeTouched = false, autoModeNotice = '';
 var FILE_EXT = ['.mp3','.mp4','.m4a','.wav','.flac','.pdf','.zip','.rar','.apk','.exe','.dmg','.mkv','.avi','.webm','.epub','.doc','.docx','.ppt','.pptx','.xls','.xlsx','.jpg','.jpeg','.png'];
 var CAT_WORDS = new Set(['category','categories','cat','tag','tags','genre','genres','archive','archives','browse','explore','topics','topic','collections','collection','section','sections','list','lists','directory','search','results','playlists','albums','artists','charts','trending','latest','popular','discover','channels','users','author','authors','page','feed','sets','likes','reposts','followers','tracks','repositories']);
 var CAT_QUERY = new Set(['s','q','search','query','cat','category','tag','page','paged','genre']);
@@ -170,6 +170,25 @@ function detectSite(host){
   }
   return '';
 }
+function updateModeButtons(){
+  Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function(x){ x.classList.toggle('on', x.getAttribute('data-m') === mode); });
+}
+function setMode(nextMode, touched){
+  mode = nextMode;
+  if (touched) { modeTouched = true; autoModeNotice = ''; }
+  updateModeButtons();
+  if (results.length) render();
+}
+function maybeAutoSwitchMode(){
+  if (!results.length || modeTouched) return false;
+  if (mode === 'direct' && !visible().length) {
+    mode = 'both';
+    autoModeNotice = 'Direct links nahi mile, is liye category links bhi dikha diye gaye hain.';
+    updateModeButtons();
+    return true;
+  }
+  return false;
+}
 
 function classify(url){
   try {
@@ -199,8 +218,9 @@ function classify(url){
 
 function addResults(list){ (list||[]).forEach(function(r){ if(!safe(r.url)) return; var k=normKey(r.url); if(seen[k]) return; seen[k]=1; results.push(r); }); render(); }
 function render(){
+  var visList = visible();
   var groups={}, order=[];
-  visible().sort(function(a,b){ return rank(b)-rank(a); }).forEach(function(r){
+  visList.slice().sort(function(a,b){ return rank(b)-rank(a); }).forEach(function(r){
     var d; try{ d=new URL(r.url).hostname.replace(/^www\./,''); }catch(e){ d=r.source || 'other'; }
     if(!groups[d]){ groups[d]=[]; order.push(d); }
     groups[d].push(r);
@@ -221,16 +241,25 @@ function render(){
     });
     out.appendChild(g);
   });
-  var vis=visible().length, hidden=results.length-vis;
+  var vis=visList.length, hidden=results.length-vis;
   $('tools').style.display = vis ? 'flex' : 'none';
   $('more').style.display = currentJobs.some(function(j){ return j.more; }) ? '' : 'none';
   if(!busy && results.length){
     var n=Object.keys(groups).length;
-    statusEl.textContent = vis + ' links, ' + n + ' websites se.' + (hidden ? ' (' + hidden + ' doosri type ke links chhupe hain, upar "Dono" chunein)' : '');
+    if (vis) {
+      statusEl.textContent = vis + ' links, ' + n + ' websites se.' + (hidden ? ' (' + hidden + ' doosri type ke links bhi available hain)' : '');
+      if (autoModeNotice) statusEl.textContent += ' ' + autoModeNotice;
+    } else {
+      var directCount = results.filter(function(r){ return r.kind === 'direct'; }).length;
+      var categoryCount = results.filter(function(r){ return r.kind === 'category'; }).length;
+      if (mode === 'direct') statusEl.textContent = 'Direct links nahi mile. ' + categoryCount + ' category links available hain.';
+      else if (mode === 'category') statusEl.textContent = 'Category links nahi mile. ' + directCount + ' direct links available hain.';
+      else statusEl.textContent = 'Koi visible link nahi mila.';
+    }
     var cnt={}; results.forEach(function(r){ cnt[r.source]=(cnt[r.source]||0)+1; });
     out.appendChild(el('div','msg','Sources: ' + Object.keys(cnt).map(function(k){ return k + ' ' + cnt[k]; }).join(' · ')));
   }
-  if(!busy && results.length && !vis) out.appendChild(el('div','msg','Is filter me koi link nahi mila. "Dono" try karein.'));
+  if(!busy && results.length && !vis) out.appendChild(el('div','msg','Is filter me koi link nahi mila. Upar filter change karke dekhein.'));
 }
 
 function jsonp(url, cbParam, timeout){
@@ -369,7 +398,7 @@ async function run(more){
   if (busy) return;
   var q, s, c;
   if (more && last) { q = last.q; s = last.s; c = last.c; page++; }
-  else { q = what.value.trim(); s = cleanSite(site.value); c = cat.value; page = 0; ytNext = ''; last = { q:q, s:s, c:c }; }
+  else { q = what.value.trim(); s = cleanSite(site.value); c = cat.value; page = 0; ytNext = ''; autoModeNotice = ''; last = { q:q, s:s, c:c }; }
   if (!q) { statusEl.textContent = 'Pehle likhein ke kis cheez ka link chahiye.'; return; }
 
   q0 = q; busy = true; $('tools').style.display='none';
@@ -401,6 +430,7 @@ async function run(more){
     statusEl.textContent = '';
     out.appendChild(el('div','msg','Koi link nahi mila.\n' + errs.slice(0,5).join('\n') + '\nTip: unsupported sites ke liye ye version search shortcuts deta hai.'));
   } else {
+    maybeAutoSwitchMode();
     render();
     if (errs.length) out.appendChild(el('div','msg','Kuch sources fail hue:\n' + errs.slice(0,5).join('\n') + '\nPossible reason: rate-limit ya external API issue.'));
   }
@@ -408,14 +438,14 @@ async function run(more){
 }
 
 Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function(b){
-  b.onclick = function(){ mode = b.getAttribute('data-m'); Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function(x){ x.classList.toggle('on', x===b); }); if(results.length) render(); };
+  b.onclick = function(){ setMode(b.getAttribute('data-m'), true); };
 });
 go.onclick = function(){ run(false); };
 $('more').onclick = function(){ run(true); };
 [what, site, $('ytKey')].forEach(function(i){ i.addEventListener('keydown', function(e){ if (e.key === 'Enter') run(false); }); });
-$('clr').onclick = function(){ what.value=''; site.value=''; out.innerHTML=''; statusEl.textContent=''; results=[]; seen={}; last=null; page=0; ytNext=''; currentJobs=[]; $('tools').style.display='none'; what.focus(); };
+$('clr').onclick = function(){ what.value=''; site.value=''; out.innerHTML=''; statusEl.textContent=''; results=[]; seen={}; last=null; page=0; ytNext=''; currentJobs=[]; autoModeNotice=''; modeTouched=false; mode='direct'; updateModeButtons(); $('tools').style.display='none'; what.focus(); };
 $('copyAll').onclick = function(){ copyText(visible().map(function(r){ return r.url; }).join('\n'), $('copyAll')); };
 $('saveAll').onclick = function(){ var txt = visible().map(function(r){ return r.title + '\n' + r.url + '\n'; }).join('\n'); var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([txt], {type:'text/plain'})); a.download='links.txt'; document.body.appendChild(a); a.click(); a.remove(); };
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a45673afbe189c17',t:'MTc5MTE0MDY2MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
