@@ -2,89 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Link Finder - GitHub Pages Safe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cf5">
+<title>Link Finder (Live)</title>
 <style>
-:root{--bg:#f4f3ff;--card:#fff;--text:#1d1b3a;--muted:#6b6a8a;--accent:#6c4cf5;--accent2:#22c1c3;--border:#e3e0fb;--ok:#d9f7e8;--okText:#0a7a45;--warn:#fff1d6;--warnText:#9a5a00}
-@media (prefers-color-scheme:dark){:root{--bg:#0f0e1d;--card:#1a1930;--text:#ecebff;--muted:#9c9bc0;--accent:#8c73ff;--accent2:#2fd4d6;--border:#2d2b4d;--ok:#103d2a;--okText:#5fe3a2;--warn:#43320f;--warnText:#ffc46b}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:920px;margin:0 auto;padding:28px 16px 56px}.hero{text-align:center;margin-bottom:22px}
+:root{--bg:#f4f3ff;--card:#fff;--text:#1d1b3a;--muted:#6b6a8a;--accent:#6c4cf5;--accent2:#22c1c3;--border:#e3e0fb}
+@media (prefers-color-scheme:dark){:root{--bg:#0f0e1d;--card:#1a1930;--text:#ecebff;--muted:#9c9bc0;--accent:#8c73ff;--accent2:#2fd4d6;--border:#2d2b4d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:28px 16px 56px}
+.hero{text-align:center;margin-bottom:22px}
 .logo{width:64px;height:64px;border-radius:20px;margin:0 auto 12px;display:grid;place-items:center;font-size:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 10px 30px rgba(108,76,245,.35)}
-h1{margin:0;font-size:2.1rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}.sub{color:var(--muted);margin:6px 0 0}
-.panel,.note{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:0 8px 30px rgba(80,60,200,.08)}.note{margin-bottom:16px}
-label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin:0 0 6px}.field{margin-bottom:14px}
+h1{margin:0;font-size:2.1rem;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:6px 0 0}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:0 8px 30px rgba(80,60,200,.08)}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin:0 0 6px}
 input,select{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-size:1rem;outline:none;font-family:inherit}
-input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,76,245,.18)}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:620px){.two{grid-template-columns:1fr}}
-.row{display:flex;gap:10px;flex-wrap:wrap}button{cursor:pointer;border:0;border-radius:12px;font-size:.95rem;font-weight:600;padding:12px 18px;font-family:inherit;transition:.2s}
-.go{flex:1;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2))}.go:disabled{opacity:.6;cursor:wait}.ghost{background:var(--bg);color:var(--text);border:1px solid var(--border)}
-.seg{display:flex;gap:6px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:4px}.seg button{flex:1;padding:9px 6px;background:transparent;color:var(--muted);font-size:.85rem}.seg button.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-#status{margin:18px 0 6px;font-size:.88rem;color:var(--muted);text-align:center;min-height:20px;white-space:pre-line}.bar{height:5px;border-radius:9px;background:var(--border);overflow:hidden;margin-top:8px;display:none}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
-.grp{margin-top:20px}.grp h2{margin:0 0 8px;font-size:1rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.grp h2 span{font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--card);border:1px solid var(--border);color:var(--accent)}
-.item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:8px}.t{font-weight:600;font-size:.95rem;margin-bottom:3px;line-height:1.35}.s{color:var(--muted);font-size:.84rem;margin-bottom:6px;line-height:1.45}
-.u{display:block;color:var(--accent);font-size:.8rem;word-break:break-all;margin-bottom:8px;text-decoration:none}.btns{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.btns a,.btns button{font-size:.78rem;padding:6px 12px;border-radius:9px;text-decoration:none}.open{background:var(--accent);color:#fff}.src{margin-left:auto;font-size:.7rem;color:var(--muted)}
-.msg{padding:14px;border-radius:12px;background:var(--card);border:1px dashed var(--border);color:var(--muted);text-align:center;margin-top:16px;white-space:pre-line;line-height:1.45}.tools{margin-top:22px;display:none}
-.kind{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-right:6px}.k-direct{background:var(--ok);color:var(--okText)}.k-category{background:var(--warn);color:var(--warnText)}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.badge{font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:999px}.b-ok{background:var(--ok);color:var(--okText)}.b-warn{background:var(--warn);color:var(--warnText)}
-details{margin-top:8px;border:1px dashed var(--border);border-radius:14px;padding:10px 12px}summary{cursor:pointer;font-weight:700;color:var(--muted)}.hint{font-size:.79rem;color:var(--muted);margin-top:4px;line-height:1.4}
-.footer{margin-top:18px;color:var(--muted);font-size:.8rem;text-align:center}.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,76,245,.18)}
+.field{margin-bottom:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.two{grid-template-columns:1fr}}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+button{cursor:pointer;border:0;border-radius:12px;font-size:.95rem;font-weight:600;padding:12px 18px;font-family:inherit;transition:.2s}
+.go{flex:1;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.go:disabled{opacity:.6;cursor:wait}
+.ghost{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+#status{margin:18px 0 6px;font-size:.88rem;color:var(--muted);text-align:center;min-height:20px}
+.bar{height:5px;border-radius:9px;background:var(--border);overflow:hidden;margin-top:8px;display:none}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
+.grp{margin-top:20px}
+.grp h2{margin:0 0 8px;font-size:1rem;display:flex;align-items:center;gap:8px}
+.grp h2 span{font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--card);border:1px solid var(--border);color:var(--accent)}
+.item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+.t{font-weight:600;font-size:.95rem;margin-bottom:3px}
+.s{color:var(--muted);font-size:.84rem;margin-bottom:6px}
+.u{display:block;color:var(--accent);font-size:.8rem;word-break:break-all;margin-bottom:8px;text-decoration:none}
+.btns{display:flex;gap:6px;align-items:center}
+.btns a,.btns button{font-size:.78rem;padding:6px 12px;border-radius:9px;text-decoration:none}
+.open{background:var(--accent);color:#fff}
+.src{margin-left:auto;font-size:.7rem;color:var(--muted)}
+.msg{padding:14px;border-radius:12px;background:var(--card);border:1px dashed var(--border);color:var(--muted);text-align:center;margin-top:16px;white-space:pre-line}
+.tools{margin-top:22px;display:none}
+html{-webkit-text-size-adjust:100%}
+button,a{-webkit-tap-highlight-color:transparent}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;padding:0;font-size:1.5rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 24px rgba(108,76,245,.5);display:none;z-index:9}
+.fab:disabled{opacity:.6}
+.fab.spinning{animation:r .8s linear infinite}
+@media(max-width:560px){
+  .wrap{padding:18px 12px 96px}
+  h1{font-size:1.7rem}
+  button,input,select{min-height:48px}
+  .btns a,.btns button{min-height:40px;display:inline-flex;align-items:center}
+  .btns{flex-wrap:wrap}
+  .panel{padding:14px;border-radius:16px}
+  .row>button{flex:1 1 40%}
+}
+.kind{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-right:6px}
+.k-direct{background:#d9f7e8;color:#0a7a45}.k-category{background:#fff1d6;color:#9a5a00}
+@media (prefers-color-scheme:dark){.k-direct{background:#103d2a;color:#5fe3a2}.k-category{background:#43320f;color:#ffc46b}}
+.seg{display:flex;gap:6px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:4px}
+.seg button{flex:1;padding:9px 6px;background:transparent;color:var(--muted);font-size:.85rem}
+.seg button.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="hero">
     <div class="logo">🔗</div>
-    <h1>Link Finder</h1>
-    <p class="sub">GitHub Pages compatible single-file version</p>
+    <h1>Link Finder (Live)</h1>
+    <p class="sub">Koi pehle se saved result nahi. Har baar internet par asli search hoti hai.</p>
+    <p class="sub"><a href="#" id="cfg" style="color:inherit">⚙ Worker address badlein</a></p>
   </div>
-
-  <div class="note">
-    <strong>Is version me kya change hua?</strong>
-    <div style="margin-top:8px;line-height:1.5">Ye static-hosting safe build hai. Is me browser-CORS friendly APIs aur direct search pages use ho rahe hain — random websites ka raw crawl/scrape nahi.</div>
-    <div class="badges">
-      <span class="badge b-ok">Works well: Wikipedia, GitHub, StackOverflow, iTunes</span>
-      <span class="badge b-ok">YouTube works with optional API key</span>
-      <span class="badge b-warn">Unsupported sites → search shortcuts shown</span>
-    </div>
-  </div>
-
   <div class="panel">
     <div class="field">
       <label>Kis cheez ka link chahiye?</label>
       <input id="what" placeholder="e.g. Tum Hi Ho Arijit Singh" autocomplete="off">
     </div>
-
     <div class="two">
       <div class="field">
-        <label>Website URL (optional)</label>
-        <input id="site" placeholder="e.g. youtube.com" autocomplete="off">
+        <label>Website URL (optional, ek se zyada comma se)</label>
+        <input id="site" placeholder="e.g. site1.com, site2.com" autocomplete="off">
       </div>
       <div class="field">
-        <label>Kahan dhoondna hai</label>
+        <label>Kahan dhoondna hai (khali website par)</label>
         <select id="cat">
-          <option value="music">Song / Music</option>
+          <option value="music">Song / Music (zyada jagah)</option>
           <option value="video">Video</option>
           <option value="code">Code / Software</option>
-          <option value="all">General</option>
+          <option value="all">Sirf general web</option>
         </select>
       </div>
     </div>
-
     <div class="two">
       <div class="field">
-        <label>Kitne results chahiye (YouTube / APIs)</label>
-        <select id="cnt"><option>10</option><option selected>25</option><option>50</option></select>
+        <label>Kitne results chahiye</label>
+        <select id="cnt"><option>20</option><option selected>50</option><option>100</option><option>200</option></select>
       </div>
       <div class="field">
         <label>YouTube ki tarteeb</label>
-        <select id="sort">
-          <option value="">Sab se munasib</option>
-          <option value="views">Sab se zyada views</option>
-          <option value="date">Sab se naye</option>
-          <option value="rating">Best rating</option>
-        </select>
+        <select id="sort"><option value="">Sab se munasib</option><option value="views">Sab se zyada views</option><option value="date">Sab se naye</option><option value="rating">Best rating</option></select>
       </div>
     </div>
-
     <div class="field">
       <label>Kis tarah ka link chahiye?</label>
       <div class="seg" id="seg">
@@ -93,359 +111,191 @@ details{margin-top:8px;border:1px dashed var(--border);border-radius:14px;paddin
         <button data-m="both">Dono</button>
       </div>
     </div>
-
-    <details>
-      <summary>Advanced (optional)</summary>
-      <div class="field" style="margin-top:12px">
-        <label>YouTube API Key</label>
-        <input id="ytKey" placeholder="Agar ho to yahan paste karein">
-        <div class="hint">GitHub Pages par YouTube live results lane ke liye API key helpful hai. Is key ko Google Cloud me <span class="code">HTTP referrer</span> se apne GitHub Pages domain tak restrict kar dena best hai.</div>
-      </div>
-    </details>
-
-    <div class="row" style="margin-top:14px">
+    <div class="row">
       <button class="go" id="go">🔍 Dhoondo</button>
+      <button class="ghost" id="refresh" title="Purane results hata kar sirf naye dikhao">🔄 Refresh (naye)</button>
       <button class="ghost" id="clr">Clear</button>
     </div>
   </div>
-
   <div id="status"></div>
   <div class="bar" id="bar"><i id="fill"></i></div>
   <div id="out"></div>
+  <button class="fab" id="fab" title="Refresh: sirf naye results">🔄</button>
   <div class="tools row" id="tools">
     <button class="ghost" id="more">➕ Aur results</button>
     <button class="ghost" id="copyAll">📋 Saare links copy</button>
     <button class="ghost" id="saveAll">⬇️ .txt me save</button>
   </div>
-  <div class="footer">Static hosting note: ye build GitHub Pages ke liye optimize ki gayi hai. Arbitrary site scraping intentionally hata di gayi hai.</div>
 </div>
-
 <script>
 var $ = function (i) { return document.getElementById(i); };
+var API = '';
+try { API = localStorage.getItem('lf_api') || ''; } catch (e) {}
+function askApi() {
+  var v = (prompt('Apne Cloudflare Worker ka address likhein\n(e.g. https://link-finder.aapka-naam.workers.dev)', API) || '').trim().replace(/\/+$/, '');
+  if (v) { API = v; try { localStorage.setItem('lf_api', v); } catch (e) {} }
+  return API;
+}
+if (!API) askApi();
 var what = $('what'), site = $('site'), cat = $('cat'), go = $('go'), out = $('out'), statusEl = $('status');
-var results = [], seen = {}, busy = false, mode = 'direct', q0 = '', last = null, page = 0, ytNext = '', newCount = 0, currentJobs = [], modeTouched = false, autoModeNotice = '';
-var FILE_EXT = ['.mp3','.mp4','.m4a','.wav','.flac','.pdf','.zip','.rar','.apk','.exe','.dmg','.mkv','.avi','.webm','.epub','.doc','.docx','.ppt','.pptx','.xls','.xlsx','.jpg','.jpeg','.png'];
-var CAT_WORDS = new Set(['category','categories','cat','tag','tags','genre','genres','archive','archives','browse','explore','topics','topic','collections','collection','section','sections','list','lists','directory','search','results','playlists','albums','artists','charts','trending','latest','popular','discover','channels','users','author','authors','page','feed','sets','likes','reposts','followers','tracks','repositories']);
-var CAT_QUERY = new Set(['s','q','search','query','cat','category','tag','page','paged','genre']);
-var CATEGORY_SITES = {
-  music: ['spotify','soundcloud','applemusic','genius'],
-  video: ['youtube','vimeo','dailymotion'],
-  code: ['github','stackoverflow','npm','pypi'],
+var results = [], seen = {}, busy = false, mode = 'direct', q0 = '';
+var CATS = {
+  music: ['open.spotify.com', 'soundcloud.com', 'music.apple.com', 'jiosaavn.com', 'gaana.com', 'deezer.com', 'genius.com', 'audiomack.com'],
+  video: ['dailymotion.com', 'vimeo.com', 'facebook.com', 'tiktok.com'],
+  code: ['github.com', 'sourceforge.net', 'stackoverflow.com', 'npmjs.com', 'pypi.org'],
   all: []
 };
-var SITE_INFO = {
-  youtube:{hosts:['youtube.com','youtu.be'], search:function(q){return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);}, title:'YouTube'},
-  spotify:{hosts:['open.spotify.com','spotify.com'], search:function(q){return 'https://open.spotify.com/search/' + encodeURIComponent(q);}, title:'Spotify'},
-  soundcloud:{hosts:['soundcloud.com'], search:function(q){return 'https://soundcloud.com/search?q=' + encodeURIComponent(q);}, title:'SoundCloud'},
-  applemusic:{hosts:['music.apple.com','apple.com'], search:function(q){return 'https://music.apple.com/us/search?term=' + encodeURIComponent(q);}, title:'Apple Music'},
-  genius:{hosts:['genius.com'], search:function(q){return 'https://genius.com/search?q=' + encodeURIComponent(q);}, title:'Genius'},
-  vimeo:{hosts:['vimeo.com'], search:function(q){return 'https://vimeo.com/search?q=' + encodeURIComponent(q);}, title:'Vimeo'},
-  dailymotion:{hosts:['dailymotion.com'], search:function(q){return 'https://www.dailymotion.com/search/' + encodeURIComponent(q);}, title:'Dailymotion'},
-  github:{hosts:['github.com'], search:function(q){return 'https://github.com/search?q=' + encodeURIComponent(q) + '&type=repositories';}, title:'GitHub'},
-  stackoverflow:{hosts:['stackoverflow.com'], search:function(q){return 'https://stackoverflow.com/search?q=' + encodeURIComponent(q);}, title:'StackOverflow'},
-  npm:{hosts:['npmjs.com'], search:function(q){return 'https://www.npmjs.com/search?q=' + encodeURIComponent(q);}, title:'npm'},
-  pypi:{hosts:['pypi.org'], search:function(q){return 'https://pypi.org/search/?q=' + encodeURIComponent(q);}, title:'PyPI'},
-  wikipedia:{hosts:['wikipedia.org'], search:function(q){return 'https://en.wikipedia.org/w/index.php?search=' + encodeURIComponent(q);}, title:'Wikipedia'}
-};
-$('ytKey').value = localStorage.getItem('linkfinder_yt_key') || '';
-$('ytKey').addEventListener('input', function(){ localStorage.setItem('linkfinder_yt_key', $('ytKey').value.trim()); });
-
 function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 function safe(u) { try { var x = new URL(u); return (x.protocol === 'https:' || x.protocol === 'http:') ? x : null; } catch (e) { return null; } }
-function stripHtml(s) { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || d.innerText || '').replace(/\s+/g, ' ').trim(); }
-function copyText(t, btn) { var done = function(){ var o = btn.textContent; btn.textContent='Copied ✓'; setTimeout(function(){btn.textContent=o;},1400); }; try{ navigator.clipboard.writeText(t).then(done, function(){fallback();}); }catch(e){ fallback(); } function fallback(){ var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(e){} ta.remove(); } }
-function item(title, url, snippet, source, kind) { return { title: title || url, url: url, snippet: snippet || '', source: source, kind: kind || classify(url) }; }
-function cleanSite(s) { return (s || '').trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[/?#]/)[0].toLowerCase(); }
-function delay(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
-function normKey(u){ try{ var x=new URL(u); x.hash=''; ['utm_source','utm_medium','utm_campaign','fbclid','gclid','si'].forEach(function(p){x.searchParams.delete(p);}); return x.hostname.replace(/^www\./,'').toLowerCase()+x.pathname.replace(/\/$/,'')+x.search; }catch(e){ return u; } }
-function words(){ return q0.toLowerCase().split(/\s+/).filter(function(w){ return w.length > 1; }); }
-function rank(r){ var h=(r.title+' '+r.url+' '+(r.snippet||'')).toLowerCase(), n=0; words().forEach(function(w){ if(h.indexOf(w)>-1) n++; }); return n + (r.kind==='direct' ? 0.5 : 0); }
-function visible(){ return results.filter(function(r){ return mode==='both' || r.kind===mode; }); }
-
-function hostMatches(host, target){ return host===target || host.endsWith('.'+target); }
-function detectSite(host){
-  host = cleanSite(host);
-  for (var k in SITE_INFO) {
-    if (SITE_INFO[k].hosts.some(function(h){ return hostMatches(host, h); })) return k;
-  }
-  return '';
+function cleanSite(s) { return s.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '').split(/[\/?#]/)[0].toLowerCase(); }
+function cleanSites(v) { var o = []; v.split(/[\s,;]+/).forEach(function (x) { x = cleanSite(x); if (x && o.indexOf(x) < 0) o.push(x); }); return o.join(','); }
+function copyText(t, btn) {
+  var done = function () { var o = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(function () { btn.textContent = o; }, 1400); };
+  var fb = function () { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) {} ta.remove(); };
+  try { navigator.clipboard.writeText(t).then(done, fb); } catch (e) { fb(); }
 }
-function updateModeButtons(){
-  Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function(x){ x.classList.toggle('on', x.getAttribute('data-m') === mode); });
+var ytNext = '';
+async function api(type, q, s, page) {
+  var extra = '';
+  if (type === 'yt') extra = '&count=' + $('cnt').value + '&sort=' + $('sort').value + (page > 0 && ytNext ? '&token=' + encodeURIComponent(ytNext) : '');
+  else if (type === 'crawl' || type === 'archive') extra = '&count=' + $('cnt').value;
+  var r = await fetch(API + '/api/job?type=' + type + '&q=' + encodeURIComponent(q) + '&site=' + encodeURIComponent(s || '') + '&page=' + (page || 0) + extra + '&_=' + Date.now(), { cache: 'no-store' });
+  var d = await r.json();
+  if (d.error) throw new Error(d.error);
+  if (type === 'yt') ytNext = d.next || '';
+  return d.results;
 }
-function setMode(nextMode, touched){
-  mode = nextMode;
-  if (touched) { modeTouched = true; autoModeNotice = ''; }
-  updateModeButtons();
-  if (results.length) render();
+function normKey(u) {
+  try { var x = new URL(u); x.hash = ''; ['utm_source', 'utm_medium', 'utm_campaign', 'fbclid'].forEach(function (p) { x.searchParams.delete(p); });
+    return x.hostname.replace(/^www\./, '').toLowerCase() + x.pathname.replace(/\/$/, '') + x.search; } catch (e) { return u; }
 }
-function maybeAutoSwitchMode(){
-  if (!results.length || modeTouched) return false;
-  if (mode === 'direct' && !visible().length) {
-    mode = 'both';
-    autoModeNotice = 'Direct links nahi mile, is liye category links bhi dikha diye gaye hain.';
-    updateModeButtons();
-    return true;
-  }
-  return false;
+function hostOk(u, s) { try { var h = new URL(u).hostname.toLowerCase().replace(/^www\./, ''); s = s.toLowerCase(); return h === s || h.endsWith('.' + s); } catch (e) { return false; } }
+function addResults(list) {
+  list.forEach(function (r) { if (!safe(r.url)) return; if (last && last.s && !last.s.split(',').some(function (d) { return hostOk(r.url, d); })) return; var k = normKey(r.url); if (seen[k]) return; seen[k] = 1; results.push(r); });
+  render();
 }
-
-function classify(url){
-  try {
-    var p = new URL(url), path = p.pathname.toLowerCase(), host = p.hostname.toLowerCase().replace(/^www\./,''), segs = path.split('/').filter(Boolean), qKeys = new Set(Array.from(p.searchParams.keys()).map(function(k){return k.toLowerCase();}));
-    for (var i=0;i<FILE_EXT.length;i++) if (path.endsWith(FILE_EXT[i])) return 'direct';
-    if (host === 'youtu.be') return segs.length ? 'direct' : 'category';
-    if (host.endsWith('youtube.com')) return ((path === '/watch' && p.searchParams.get('v')) || (segs[0] === 'shorts' && segs[1])) ? 'direct' : 'category';
-    if (host.endsWith('spotify.com')) return (segs.indexOf('track')>-1 || segs.indexOf('episode')>-1) ? 'direct' : 'category';
-    if (host === 'music.apple.com') return (segs.indexOf('song')>-1 || p.searchParams.get('i')) ? 'direct' : 'category';
-    if (host === 'soundcloud.com') return (segs.length===2 && !CAT_WORDS.has(segs[1])) ? 'direct' : 'category';
-    if (host === 'genius.com') return path.endsWith('-lyrics') ? 'direct' : 'category';
-    if (host === 'github.com') return (segs.length>=2 && segs[0] !== 'search' && segs[0] !== 'topics') ? 'direct' : 'category';
-    if (host.indexOf('stackoverflow.com')>-1) return (segs[0]==='questions' && segs[1]) ? 'direct' : 'category';
-    if (host.indexOf('wikipedia.org')>-1) return (path.indexOf('/wiki/')===0 || p.searchParams.get('curid')) ? 'direct' : 'category';
-    if (host === 'npmjs.com') return segs[0]==='package' ? 'direct' : 'category';
-    if (host === 'pypi.org') return segs[0]==='project' ? 'direct' : 'category';
-    if (!segs.length || Array.from(qKeys).some(function(k){return CAT_QUERY.has(k);} )) return 'category';
-    if (segs.slice(0,-1).some(function(s){return CAT_WORDS.has(s);}) || (segs.length===1 && CAT_WORDS.has(segs[0]))) return 'category';
-    var slug = segs[segs.length-1];
-    if (CAT_WORDS.has(slug) || /^\d{1,3}$/.test(slug)) return 'category';
-    var hy = (slug.match(/[-_]/g) || []).length;
-    if (hy >= 2 || slug.length >= 20) return 'direct';
-    if (segs.length >= 2 && (hy >= 1 || /\d/.test(slug))) return 'direct';
-    return 'category';
-  } catch(e) { return 'category'; }
-}
-
-function addResults(list){ (list||[]).forEach(function(r){ if(!safe(r.url)) return; var k=normKey(r.url); if(seen[k]) return; seen[k]=1; results.push(r); }); render(); }
-function render(){
-  var visList = visible();
-  var groups={}, order=[];
-  visList.slice().sort(function(a,b){ return rank(b)-rank(a); }).forEach(function(r){
-    var d; try{ d=new URL(r.url).hostname.replace(/^www\./,''); }catch(e){ d=r.source || 'other'; }
-    if(!groups[d]){ groups[d]=[]; order.push(d); }
+function words() { return q0.toLowerCase().split(/\s+/).filter(function (w) { return w.length > 1; }); }
+function rank(r) { var h = (r.title + ' ' + r.url).toLowerCase(), n = 0; words().forEach(function (w) { if (h.indexOf(w) > -1) n++; }); return n + (r.kind === 'direct' ? 0.5 : 0); }
+function visible() { return results.filter(function (r) { return mode === 'both' || r.kind === mode; }); }
+function render() {
+  var groups = {}, order = [];
+  visible().sort(function (a, b) { return rank(b) - rank(a); }).forEach(function (r) {
+    var d = new URL(r.url).hostname.replace(/^www\./, '');
+    if (!groups[d]) { groups[d] = []; order.push(d); }
     groups[d].push(r);
   });
-  order.sort(function(a,b){ return groups[b].length - groups[a].length; });
-  out.innerHTML='';
-  order.forEach(function(d){
-    var g=el('div','grp'), h=el('h2','',d); h.appendChild(el('span','',groups[d].length + ' link' + (groups[d].length>1?'s':''))); g.appendChild(h);
-    groups[d].forEach(function(r){
-      var c=el('div','item');
-      var tt=el('div','t'); tt.appendChild(el('span','kind k-'+r.kind, r.kind==='direct' ? 'DIRECT' : 'CATEGORY')); tt.appendChild(document.createTextNode(r.title || r.url)); c.appendChild(tt);
-      if(r.snippet) c.appendChild(el('div','s', r.snippet.slice(0,260)));
-      var a=el('a','u',r.url); a.href=r.url; a.target='_blank'; a.rel='noopener noreferrer'; c.appendChild(a);
-      var b=el('div','btns');
-      var o=el('a','open','Open ↗'); o.href=r.url; o.target='_blank'; o.rel='noopener noreferrer';
-      var cp=el('button','ghost','Copy'); cp.onclick=function(){ copyText(r.url, cp); };
-      b.appendChild(o); b.appendChild(cp); b.appendChild(el('span','src',r.source)); c.appendChild(b); g.appendChild(c);
+  order.sort(function (a, b) { return groups[b].length - groups[a].length; });
+  out.innerHTML = '';
+  order.forEach(function (d) {
+    var g = el('div', 'grp'), h = el('h2', '', d); h.appendChild(el('span', '', groups[d].length + ' link' + (groups[d].length > 1 ? 's' : '')));
+    g.appendChild(h);
+    groups[d].forEach(function (r) {
+      var c = el('div', 'item');
+      var tt = el('div', 't'); tt.appendChild(el('span', 'kind k-' + r.kind, r.kind === 'direct' ? 'DIRECT' : 'CATEGORY')); tt.appendChild(document.createTextNode(r.title || r.url)); c.appendChild(tt);
+      if (r.snippet) c.appendChild(el('div', 's', r.snippet.slice(0, 200)));
+      var a = el('a', 'u', r.url); a.href = r.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; c.appendChild(a);
+      var b = el('div', 'btns');
+      var o = el('a', 'open', 'Open ↗'); o.href = r.url; o.target = '_blank'; o.rel = 'noopener noreferrer';
+      var cp = el('button', 'ghost', 'Copy'); cp.onclick = function () { copyText(r.url, cp); };
+      b.appendChild(o); b.appendChild(cp);
+      if (navigator.share) { var sh = el('button', 'ghost', 'Share'); sh.onclick = function () { navigator.share({ title: r.title, url: r.url }).catch(function () {}); }; b.appendChild(sh); }
+      b.appendChild(el('span', 'src', r.source));
+      c.appendChild(b); g.appendChild(c);
     });
     out.appendChild(g);
   });
-  var vis=visList.length, hidden=results.length-vis;
+  var vis = visible().length, hidden = results.length - vis;
   $('tools').style.display = vis ? 'flex' : 'none';
-  $('more').style.display = currentJobs.some(function(j){ return j.more; }) ? '' : 'none';
-  if(!busy && results.length){
-    var n=Object.keys(groups).length;
-    if (vis) {
-      statusEl.textContent = vis + ' links, ' + n + ' websites se.' + (hidden ? ' (' + hidden + ' doosri type ke links bhi available hain)' : '');
-      if (autoModeNotice) statusEl.textContent += ' ' + autoModeNotice;
-    } else {
-      var directCount = results.filter(function(r){ return r.kind === 'direct'; }).length;
-      var categoryCount = results.filter(function(r){ return r.kind === 'category'; }).length;
-      if (mode === 'direct') statusEl.textContent = 'Direct links nahi mile. ' + categoryCount + ' category links available hain.';
-      else if (mode === 'category') statusEl.textContent = 'Category links nahi mile. ' + directCount + ' direct links available hain.';
-      else statusEl.textContent = 'Koi visible link nahi mila.';
-    }
-    var cnt={}; results.forEach(function(r){ cnt[r.source]=(cnt[r.source]||0)+1; });
-    out.appendChild(el('div','msg','Sources: ' + Object.keys(cnt).map(function(k){ return k + ' ' + cnt[k]; }).join(' · ')));
+  if (!busy && results.length) {
+    var n = Object.keys(groups).length;
+    statusEl.textContent = vis + ' links, ' + n + ' websites se.' + (hidden ? ' (' + hidden + ' ' + (mode === 'direct' ? 'category' : 'direct') + ' links chhupe hain, upar "Dono" chunein)' : '');
   }
-  if(!busy && results.length && !vis) out.appendChild(el('div','msg','Is filter me koi link nahi mila. Upar filter change karke dekhein.'));
-}
-
-function jsonp(url, cbParam, timeout){
-  cbParam = cbParam || 'callback'; timeout = timeout || 15000;
-  return new Promise(function(resolve, reject){
-    var cb='__jsonp_' + Math.random().toString(36).slice(2), script=document.createElement('script'), done=false;
-    var timer=setTimeout(function(){ cleanup(); reject(new Error('request timeout')); }, timeout);
-    function cleanup(){ if(done) return; done=true; clearTimeout(timer); try{ delete window[cb]; }catch(e){ window[cb]=undefined; } script.remove(); }
-    window[cb]=function(data){ cleanup(); resolve(data); };
-    script.onerror=function(){ cleanup(); reject(new Error('jsonp load fail')); };
-    script.src = url + (url.indexOf('?')>-1 ? '&' : '?') + cbParam + '=' + encodeURIComponent(cb);
-    document.head.appendChild(script);
-  });
-}
-async function fetchJson(url, timeout){
-  timeout = timeout || 15000;
-  var ctl = new AbortController(), t = setTimeout(function(){ ctl.abort(); }, timeout);
-  try { var r = await fetch(url, {signal:ctl.signal, headers:{'Accept':'application/json'}}); if(!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); }
-  finally { clearTimeout(t); }
-}
-
-function flattenDDGTopics(arr, out){ out = out || []; (arr || []).forEach(function(x){ if (x && x.FirstURL) out.push(x); else if (x && x.Topics) flattenDDGTopics(x.Topics, out); }); return out; }
-async function ddg(q){
-  var d = await jsonp('https://api.duckduckgo.com/?format=json&no_html=1&skip_disambig=0&t=linkfinder&q=' + encodeURIComponent(q));
-  var out=[];
-  if (d.AbstractURL) out.push(item(d.Heading || q, d.AbstractURL, d.AbstractText || '', 'DuckDuckGo IA'));
-  (d.Results || []).forEach(function(x){ if(x.FirstURL) out.push(item(stripHtml(x.Text) || x.FirstURL, x.FirstURL, stripHtml(x.Text || ''), 'DuckDuckGo IA')); });
-  flattenDDGTopics(d.RelatedTopics || []).slice(0,15).forEach(function(x){ if(x.FirstURL) out.push(item(stripHtml(x.Text) || x.FirstURL, x.FirstURL, stripHtml(x.Text || ''), 'DuckDuckGo IA')); });
-  return out;
-}
-async function wiki(q, pageNo){
-  var d = await fetchJson('https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=1&format=json&origin=*&srlimit=10&sroffset=' + ((pageNo || 0) * 10) + '&srsearch=' + encodeURIComponent(q));
-  return (((d || {}).query || {}).search || []).map(function(x){ return item(x.title, 'https://en.wikipedia.org/?curid=' + x.pageid, stripHtml(x.snippet || ''), 'Wikipedia'); });
-}
-async function itunes(q){
-  var d = await jsonp('https://itunes.apple.com/search?media=music&entity=song&limit=10&term=' + encodeURIComponent(q));
-  return (d.results || []).filter(function(x){ return x.trackViewUrl; }).map(function(x){ return item(x.trackName || x.trackViewUrl, x.trackViewUrl, [x.artistName, x.collectionName].filter(Boolean).join(' · '), 'Apple Music'); });
-}
-async function github(q, pageNo){
-  var d = await fetchJson('https://api.github.com/search/repositories?q=' + encodeURIComponent(q) + '&sort=stars&order=desc&per_page=10&page=' + ((pageNo || 0) + 1));
-  return (d.items || []).map(function(x){ return item(x.full_name, x.html_url, [x.full_name, x.stargazers_count + '★', x.language || '', x.description || ''].filter(Boolean).join(' · ').slice(0,250), 'GitHub'); });
-}
-async function stackoverflow(q, pageNo){
-  var d = await jsonp('https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&site=stackoverflow&pagesize=10&page=' + ((pageNo || 0) + 1) + '&q=' + encodeURIComponent(q));
-  return (d.items || []).map(function(x){ return item(stripHtml(x.title || x.link), x.link, [x.score + ' score', x.answer_count + ' answers', (x.tags || []).slice(0,4).join(', ')].filter(Boolean).join(' · '), 'StackOverflow'); });
-}
-async function youtube(q, params){
-  params = params || {};
-  var key = ($('ytKey').value || '').trim();
-  if (!key) return { results:[item('YouTube search: ' + q, 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q), 'API key nahi di gayi, is liye YouTube search page ka direct link dikhaya gaya hai.', 'YouTube', 'category')], next:'' };
-  var count = Math.min(parseInt(params.count || '25', 10) || 25, 50), sortMap={views:'viewCount',date:'date',rating:'rating'};
-  var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=' + count + '&q=' + encodeURIComponent(q) + '&key=' + encodeURIComponent(key);
-  if (params.token) url += '&pageToken=' + encodeURIComponent(params.token);
-  if (params.sort && sortMap[params.sort]) url += '&order=' + encodeURIComponent(sortMap[params.sort]);
-  var s = await fetchJson(url, 20000);
-  var list = (s.items || []).map(function(x){
-    if (!(x.id && x.id.videoId)) return null;
-    return item(x.snippet.title, 'https://www.youtube.com/watch?v=' + x.id.videoId, [x.snippet.channelTitle, new Date(x.snippet.publishedAt).toLocaleDateString()].filter(Boolean).join(' · '), 'YouTube');
-  }).filter(Boolean);
-  try {
-    var ids = list.map(function(r){ return new URL(r.url).searchParams.get('v'); }).filter(Boolean).join(',');
-    if (ids) {
-      var meta = await fetchJson('https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=' + encodeURIComponent(ids) + '&key=' + encodeURIComponent(key), 20000);
-      var map = {}; (meta.items || []).forEach(function(x){ map[x.id] = x; });
-      list.forEach(function(r){
-        var id = new URL(r.url).searchParams.get('v'), m = map[id]; if (!m) return;
-        var views = m.statistics && m.statistics.viewCount ? Number(m.statistics.viewCount).toLocaleString() + ' views' : '';
-        var dur = m.contentDetails && m.contentDetails.duration ? m.contentDetails.duration.replace(/^PT/,'').replace(/H/,'h ').replace(/M/,'m ').replace(/S/,'s').trim() : '';
-        r.snippet = [r.snippet, dur, views].filter(Boolean).join(' · ');
-      });
-    }
-  } catch (e) {}
-  return { results:list, next:s.nextPageToken || '' };
-}
-
-function genericSearchShortcuts(siteHost, q){
-  var sq = 'site:' + siteHost + ' ' + q;
-  return [
-    item('Google par ' + siteHost + ' search', 'https://www.google.com/search?q=' + encodeURIComponent(sq), 'Site-specific search shortcut', 'Search shortcut', 'category'),
-    item('Bing par ' + siteHost + ' search', 'https://www.bing.com/search?q=' + encodeURIComponent(sq), 'Site-specific search shortcut', 'Search shortcut', 'category'),
-    item('DuckDuckGo par ' + siteHost + ' search', 'https://duckduckgo.com/?q=' + encodeURIComponent(sq), 'Site-specific search shortcut', 'Search shortcut', 'category'),
-    item(siteHost + ' homepage', 'https://' + siteHost + '/', '', 'Search shortcut', 'category')
-  ];
-}
-function knownSiteShortcuts(siteKey, q){
-  var s = SITE_INFO[siteKey]; if (!s) return [];
-  var host = s.hosts[0];
-  return [
-    item(s.title + ' search: ' + q, s.search(q), 'Direct search page', 'Search shortcut', 'category'),
-    item(s.title + ' homepage', 'https://' + host + '/', '', 'Search shortcut', 'category')
-  ];
-}
-function categoryShortcuts(catKey, q){
-  var arr = [];
-  (CATEGORY_SITES[catKey] || []).forEach(function(k){ arr = arr.concat(knownSiteShortcuts(k, q)); });
-  return arr;
-}
-
-async function api(job, q, siteHost, pageNo){
-  if (job === 'wiki') return await wiki(q, pageNo);
-  if (job === 'ddg') return await ddg(q);
-  if (job === 'itunes') return await itunes(q);
-  if (job === 'github') return await github(q, pageNo);
-  if (job === 'so') return await stackoverflow(q, pageNo);
-  if (job === 'site_shortcuts') {
-    var key = detectSite(siteHost); return key ? knownSiteShortcuts(key, q) : genericSearchShortcuts(siteHost, q);
+  if (!busy && results.length) {
+    var cnt = {}; results.forEach(function (r) { cnt[r.source] = (cnt[r.source] || 0) + 1; });
+    out.appendChild(el('div', 'msg', 'Sources: ' + Object.keys(cnt).map(function (k) { return k + ' ' + cnt[k]; }).join(' · ')));
   }
-  if (job === 'cat_shortcuts') return categoryShortcuts(siteHost, q);
-  if (job === 'yt') { var y = await youtube(q, { sort:$('sort').value, count:$('cnt').value, token:(pageNo > 0 ? ytNext : '') }); ytNext = y.next || ''; return y.results; }
-  return [];
+  if (!busy && results.length && !vis) out.appendChild(el('div', 'msg', 'Is tarah ka koi link nahi mila. "Dono" ya doosri tarah chun kar dekhein.'));
 }
-
-function buildJobs(q, siteHost, catKey, pg){
-  var jobs = [], siteKey = detectSite(siteHost), hasYTKey = !!(($('ytKey').value || '').trim());
-  function J(label, type, more){ jobs.push({ label:label, type:type, more:!!more }); }
-  if (siteHost) {
-    if (siteKey === 'youtube') J('YouTube', 'yt', hasYTKey);
-    else if (siteKey === 'github') J('GitHub', 'github', true);
-    else if (siteKey === 'stackoverflow') J('StackOverflow', 'so', true);
-    else if (siteKey === 'wikipedia') J('Wikipedia', 'wiki', true);
-    else if (siteKey === 'applemusic') J('Apple Music', 'itunes', false);
-    J('Site shortcuts', 'site_shortcuts', false);
-  } else {
-    J('Wikipedia', 'wiki', true);
-    J('DuckDuckGo Instant Answer', 'ddg', false);
-    if (catKey === 'music') J('Apple Music', 'itunes', false);
-    if (catKey === 'music' || catKey === 'video') J('YouTube', 'yt', hasYTKey);
-    if (catKey === 'code') { J('GitHub', 'github', true); J('StackOverflow', 'so', true); }
-    if (catKey !== 'all') J('Category search pages', 'cat_shortcuts', false);
-  }
-  if (pg > 0) jobs = jobs.filter(function(j){ return j.more; });
-  return jobs;
-}
-
-async function run(more){
+var last = null, page = 0, newCount = 0;
+async function run(kind) {
   if (busy) return;
-  var q, s, c;
-  if (more && last) { q = last.q; s = last.s; c = last.c; page++; }
-  else { q = what.value.trim(); s = cleanSite(site.value); c = cat.value; page = 0; ytNext = ''; autoModeNotice = ''; last = { q:q, s:s, c:c }; }
+  var more = !!(kind && last), q, s, c;
+  if (more) { q = last.q; s = last.s; c = last.c; page++; }
+  else { q = what.value.trim(); s = cleanSites(site.value); c = cat.value; page = 0; last = { q: q, s: s, c: c }; }
   if (!q) { statusEl.textContent = 'Pehle likhein ke kis cheez ka link chahiye.'; return; }
-
-  q0 = q; busy = true; $('tools').style.display='none';
-  if (!more) { results=[]; seen={}; out.innerHTML=''; }
-  go.disabled = true; go.textContent='Dhoond raha hun...'; $('bar').style.display='block'; $('fill').style.width='0%';
-
-  currentJobs = buildJobs(q, s, c, page);
-  if (!currentJobs.length) currentJobs = [{ label:'Wikipedia', type:'wiki', more:true }];
-
-  var before = results.length, done = 0, total = currentJobs.length, idx = 0, errs = [];
-  function tick(l){ statusEl.textContent = 'Kaam ho raha hai (' + done + '/' + total + '): ' + l; $('fill').style.width = Math.round((done / total) * 100) + '%'; }
-  tick(currentJobs[0].label);
-
-  async function worker(){
-    while (idx < currentJobs.length) {
-      var j = currentJobs[idx++];
-      try { addResults(await api(j.type, q, s || c, page)); }
-      catch (e) { errs.push(j.label + ': ' + (e && e.message ? e.message : e)); }
-      done++; tick(j.label); await delay(40);
+  var before = results.length;
+  busy = true; q0 = q; $('tools').style.display = 'none';
+  if (!more) { results = []; seen = {}; out.innerHTML = ''; }
+  else if (kind === 'refresh') { results = []; out.innerHTML = ''; before = 0; } // purane hata do, seen yaad rakhta hai
+  go.disabled = true; go.textContent = 'Dhoond raha hun...'; $('bar').style.display = 'block';
+  $('refresh').disabled = true; $('fab').disabled = true; $('fab').classList.add('spinning');
+  var jobs = [], pg = page, sites = s ? s.split(',') : [];
+  var isYTs = function (d) { return /youtube\.com$|youtu\.be$/.test(d); };
+  if (!more) ytNext = '';
+  function J(label, type, query, st) { jobs.push({ label: label, fn: function () { return api(type, query, st, pg); } }); }
+  if (pg > 0) {
+    if (ytNext) J('YouTube ke aur videos', 'yt', q);
+    sites.forEach(function (d) {
+      if (!isYTs(d)) J(d + ' me aage ke pages', 'crawl', q, d);
+      J(d + ' search (agla page)', 'web', 'site:' + d + ' ' + q, d);
+    });
+    if (!jobs.length) J('web search (agla page)', 'web', q);
+  } else if (sites.length) {
+    var ytDone = false;
+    sites.forEach(function (d) {
+      if (isYTs(d)) { if (!ytDone) { ytDone = true; J('YouTube search', 'yt', q); } }
+      else { J(d + ' ko scan kar raha hun', 'crawl', q, d); J(d + ' ka sitemap', 'sitemap', q, d); J('Archive.org (' + d + ')', 'archive', q, d); }
+      J(d + ' me search', 'web', 'site:' + d + ' ' + q, d);
+    });
+  } else {
+    J('poore web me search', 'web', q);
+    if (c === 'music' || c === 'video') J('YouTube search', 'yt', q);
+    if (c === 'music') { J('Apple Music', 'itunes', q); J('official audio search', 'web', q + ' official audio'); }
+    CATS[c].forEach(function (d) { J(d + ' me search', 'web', q + ' site:' + d); });
+  }
+  var done = 0, total = jobs.length, idx = 0, errs = [];
+  function tick(l) { statusEl.textContent = 'Kaam ho raha hai (' + done + '/' + total + '): ' + l; $('fill').style.width = Math.round(done / total * 100) + '%'; }
+  tick(jobs[0].label);
+  async function worker() {
+    while (idx < jobs.length) {
+      var j = jobs[idx++];
+      try { addResults(await j.fn()); } catch (e) { errs.push(j.label + ': ' + e.message); }
+      done++; tick(j.label);
     }
   }
-  await Promise.all([worker(), worker(), worker()]);
-
-  $('bar').style.display='none';
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  $('bar').style.display = 'none';
   newCount = results.length - before;
-  go.disabled = false; go.textContent='🔍 Dhoondo'; busy = false;
-
   if (!results.length) {
     statusEl.textContent = '';
-    out.appendChild(el('div','msg','Koi link nahi mila.\n' + errs.slice(0,5).join('\n') + '\nTip: unsupported sites ke liye ye version search shortcuts deta hai.'));
-  } else {
-    maybeAutoSwitchMode();
-    render();
-    if (errs.length) out.appendChild(el('div','msg','Kuch sources fail hue:\n' + errs.slice(0,5).join('\n') + '\nPossible reason: rate-limit ya external API issue.'));
+    if (kind === 'refresh' && !errs.length) out.appendChild(el('div', 'msg', 'Naya kuch nahi mila, sab pehle dikh chuke hain.\nThori der baad dobara Refresh karein ya YouTube ki tarteeb badal kar dekhein.'));
+    else out.appendChild(el('div', 'msg', 'Koi link nahi mila.\n' + errs.slice(0, 4).join('\n') + '\nWorker address (⚙ link) aur internet check karein. Agar website blocked hai to VPN ya Android ka Private DNS (one.one.one.one) on karke dobara try karein.'));
   }
-  if (more && results.length) statusEl.textContent = (newCount ? newCount + ' naye links mile. ' : 'Is baar koi naya link nahi mila. ') + statusEl.textContent;
+  go.disabled = false; go.textContent = '🔍 Dhoondo'; busy = false;
+  $('refresh').disabled = false; $('fab').disabled = false; $('fab').classList.remove('spinning'); $('fab').style.display = 'block';
+  if (results.length) render();
+  if (more && results.length) statusEl.textContent = newCount ? newCount + (kind === 'refresh' ? ' naye links (purane hata diye). ' : ' naye links jude. ') + statusEl.textContent : 'Is baar koi naya link nahi mila (sab pehle se dikh chuke hain).';
 }
-
-Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function(b){
-  b.onclick = function(){ setMode(b.getAttribute('data-m'), true); };
+Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function (b) {
+  b.onclick = function () {
+    mode = b.getAttribute('data-m');
+    Array.prototype.forEach.call(document.querySelectorAll('#seg button'), function (x) { x.classList.toggle('on', x === b); });
+    if (results.length) render();
+  };
 });
-go.onclick = function(){ run(false); };
-$('more').onclick = function(){ run(true); };
-[what, site, $('ytKey')].forEach(function(i){ i.addEventListener('keydown', function(e){ if (e.key === 'Enter') run(false); }); });
-$('clr').onclick = function(){ what.value=''; site.value=''; out.innerHTML=''; statusEl.textContent=''; results=[]; seen={}; last=null; page=0; ytNext=''; currentJobs=[]; autoModeNotice=''; modeTouched=false; mode='direct'; updateModeButtons(); $('tools').style.display='none'; what.focus(); };
-$('copyAll').onclick = function(){ copyText(visible().map(function(r){ return r.url; }).join('\n'), $('copyAll')); };
-$('saveAll').onclick = function(){ var txt = visible().map(function(r){ return r.title + '\n' + r.url + '\n'; }).join('\n'); var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([txt], {type:'text/plain'})); a.download='links.txt'; document.body.appendChild(a); a.click(); a.remove(); };
+$('cfg').onclick = function (e) { e.preventDefault(); askApi(); };
+go.onclick = function () { run(); };
+$('more').onclick = function () { run('more'); };
+$('refresh').onclick = function () { run('refresh'); };
+$('fab').onclick = function () { run('refresh'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+[what, site].forEach(function (i) { i.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); }); });
+$('clr').onclick = function () { last = null; ytNext = ''; $('fab').style.display = 'none'; what.value = ''; site.value = ''; out.innerHTML = ''; statusEl.textContent = ''; results = []; seen = {}; $('tools').style.display = 'none'; what.focus(); };
+$('copyAll').onclick = function () { copyText(visible().map(function (r) { return r.url; }).join('\n'), $('copyAll')); };
+$('saveAll').onclick = function () {
+  var txt = visible().map(function (r) { return r.title + '\n' + r.url + '\n'; }).join('\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/plain' }));
+  a.download = 'links.txt'; document.body.appendChild(a); a.click(); a.remove();
+};
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a45673afbe189c17',t:'MTc5MTE0MDY2MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
